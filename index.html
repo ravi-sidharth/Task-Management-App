@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Management App</title>
+    <script src="./app.js" defer></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-800">
+    <h1 class="m-4 text-center font-bold text-3xl md:text-5xl text-white ">Todo Management App</h1>
+    <div class="flex max-w-full justify-center">
+        <form class="md:w-96 w-80 mt-4 p-5 bg-indigo-500 text-center rounded-lg shadow-lg" id="formSubmit" action="#">
+            <label for="taskTitle" class="block text-lg md:text-xl font-bold text-white">Task Title:</label>
+            <input class="mb-4 px-4 py-2 border-2 border-gray-300 rounded-lg w-full" type="text" id="taskTitle" required>
+            
+            <label for="taskDescription" class="block text-lg md:text-xl font-bold  text-white">Task Description:</label>
+            <textarea class="mb-4 px-4 py-2 border-2 border-gray-300 rounded-lg w-full" id="taskDescription" required></textarea>
+            
+            <label for="taskDueDate" class="block text-lg md:text-xl font-bold  text-white">Task Due Date:</label>
+            <input class="mb-4 px-4 py-2 border-2 border-gray-300 rounded-lg w-full" type="date" id="taskDueDate" required>
+            
+            <label for="priorityLevel" class="block text-lg md:text-xl font-bold  text-white">Priority Level:</label>
+            <select class="mb-4 px-4 py-2 border-2 border-gray-300 rounded-lg w-full" name="level" id="priorityLevel" required>
+                <option value="" selected disabled>Choose Priority</option>
+                <option value="low">Low</option>
+                <option value="medium">Medium</option>
+                <option value="high">High</option>
+            </select>
+            
+            <button class="mt-2 p-2 bg-blue-600 text-white rounded-lg w-full hover:bg-blue-500" type="submit">Add Task</button>
+        </form>
+    </div>
+    
+    <div class="w-96 m-auto rounded-lg p-4 flex justify-center gap-5 bg-gray-600 mt-6">
+        <h1 class="text-2xl font-bold text-white">Filter Tasks</h1>
+        <select id="filterTasks" class="rounded-lg w-40 px-2 py-2">
+            <option value="" selected disabled>All</option>
+            <option value="low">Low Priority Task</option>
+            <option value="medium">Medium Priority Task</option>
+            <option value="high">High Priority Task</option>
+            <option value="7daysTask">Next 7 Days Task</option>
+            <option value="pending">Pending Task</option>
+            <option value="completed">Completed Task</option>
+        </select>
+    </div>
+    
+    <h1 class="text-4xl font-bold p-4 text-center mt-4 bg-gray-300 text-black">Pending Task List</h1>
+    <div class="max-w-full flex justify-center pb-8 flex-wrap gap-5 bg-gray-200" id="pendingTask"></div>
+    
+    <h1 class="text-4xl font-bold p-4 text-center bg-blue-400 text-black">Completed Task List</h1>
+    <div class="max-w-full flex justify-center flex-wrap gap-5 bg-blue-300" id="completedTask"></div>
+</body>
+
+</html>
