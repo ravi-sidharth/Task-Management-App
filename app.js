@@ -1,4 +1,4 @@
-let todos = JSON.parse(localStorage.getItem('todos'))
+let todos = JSON.parse(localStorage.getItem('todos')) || []     
 let editingIndex = -1
 let filterTodos = []
 
