@@ -72,7 +72,7 @@ function deleteTodo(index) {
 function completeTodo(index) {
     // Toggle the task's completed status
     // todos[index].taskCompleted = !todos[index].taskCompleted;
-3
+
     if (todos[index].taskCompleted) {
         todos[index].taskCompleted = false;
     } else {
