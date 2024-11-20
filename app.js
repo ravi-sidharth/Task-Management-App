@@ -1,13 +1,13 @@
-let todos = JSON.parse(localStorage.getItem('todos')) || []     
+const todos = JSON.parse(localStorage.getItem('todos')) || []     
 let editingIndex = -1
 let filterTodos = []
 
-let formSubmit = document.getElementById('formSubmit')
-let submitBtn = document.querySelector('button')
-let taskTitle = document.getElementById('taskTitle')
-let taskDescription = document.getElementById('taskDescription')
-let taskDueDate = document.getElementById('taskDueDate')
-let priorityLevel = document.getElementById('priorityLevel')
+const formSubmit = document.getElementById('formSubmit')
+const submitBtn = document.querySelector('button')
+const taskTitle = document.getElementById('taskTitle')
+const taskDescription = document.getElementById('taskDescription')
+const taskDueDate = document.getElementById('taskDueDate')
+const priorityLevel = document.getElementById('priorityLevel')
 
 formSubmit.addEventListener('submit',(event)=> { 
     event.preventDefault()
@@ -43,20 +43,13 @@ function clearForm() {
 
 // function start editing a todo 
 function editTodo(index){
+    alert("Edit the data in the below form")
     const task = todos[index]
-    // console.log(task)
 
     taskTitle.value = task.taskTitle;
-    // console.log(task.taskTitle)
-
     taskDescription.value = task.taskDescription;
-    // console.log(task.taskDescription)
-
     taskDueDate.value = task.taskDueDate;
-    // console.log(task.taskDueDate)
-
     priorityLevel.value = task.priorityLevel;
-    // console.log(task.priorityLevel)
     editingIndex=index
     submitBtn.textContent="Update Task"
    
@@ -71,21 +64,21 @@ function deleteTodo(index) {
 
 function completeTodo(index) {
     // Toggle the task's completed status
-    // todos[index].taskCompleted = !todos[index].taskCompleted;
+    todos[index].taskCompleted = !todos[index].taskCompleted;
 
-    if (todos[index].taskCompleted) {
-        todos[index].taskCompleted = false;
-    } else {
-        todos[index].taskCompleted = true;
-    }
+    // if (todos[index].taskCompleted) {
+    //     todos[index].taskCompleted = false;
+    // } else {
+    //     todos[index].taskCompleted = true;
+    // }
     saveTodosToLocalStorage();
     renderTodos();
 }
 
 function renderTodos() {
-    const todoList = document.getElementById('pendingTask')
+    const pendingTaskList = document.getElementById('pendingTask')
     const completedTaskList = document.getElementById('completedTask')
-    todoList.innerHTML=""
+    pendingTaskList.innerHTML=""
     completedTaskList.innerHTML=""
     
     todos.forEach((todo,index)=> {
@@ -107,7 +100,7 @@ function renderTodos() {
             list.className ="bg-slate-300 rounded-lg mt-6 p-3 border-2 opacity-0.2 line-through"
             completedTaskList.appendChild(list);
         } else {
-            todoList.appendChild(list);
+            pendingTaskList.appendChild(list);
             list.className ="bg-fuchsia-500 rounded-lg mt-6 p-3 border-2 uppercase"
         }
     })
@@ -145,10 +138,8 @@ filterTasks.addEventListener('change',(e)=>{
     else if (e.target.value=="7daysTask"){
         todos.forEach(todo=> {
             const todayDate = new Date().getDate()
-            // console.log(todayDate)
-            // console.log(todo.taskDueDate)
             const taskDate =new Date(todo.taskDueDate).getDate()
-            // console.log(taskDate)
+            
             if(taskDate>todayDate && taskDate<=(todayDate+7)) {
                 filterTodos.push(todo)
             }
@@ -175,9 +166,9 @@ filterTasks.addEventListener('change',(e)=>{
 })
 
 function renderFilterTodos() {
-    const todoList = document.getElementById('pendingTask')
+    const pendingTaskList = document.getElementById('pendingTask')
     const completedTaskList = document.getElementById('completedTask')
-    todoList.innerHTML=""
+    pendingTaskList.innerHTML=""
     completedTaskList.innerHTML=""
 
     filterTodos.forEach((todo,index)=> {
@@ -200,7 +191,7 @@ function renderFilterTodos() {
             completedTaskList.appendChild(list);
         } else {
             list.className ="bg-fuchsia-700 rounded-lg mt-6 p-3 border-2 uppercase"
-            todoList.appendChild(list); 
+            pendingTaskList.appendChild(list); 
         }
     })  
 }
