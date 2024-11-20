@@ -25,12 +25,12 @@ formSubmit.addEventListener('submit',(event)=> {
         todos[editingIndex] = newTask
         editingIndex =-1
         submitBtn.textContent = "Add Task"; 
-        saveTodosToLocalStorage()
     }
     else {
         todos.push(newTask)
     }
     clearForm()
+    saveTodosToLocalStorage()
     renderTodos()
 })
 
@@ -110,7 +110,6 @@ function renderTodos() {
 const filterTasks = document.getElementById('filterTasks')
 filterTasks.addEventListener('change',(e)=>{
     filterTodos=[]
-
     if (e.target.value=="low"){
         todos.forEach(todo=> {
             if(todo.priorityLevel=="low") {
