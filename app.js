@@ -65,12 +65,6 @@ function deleteTodo(index) {
 function completeTodo(index) {
     // Toggle the task's completed status
     todos[index].taskCompleted = !todos[index].taskCompleted;
-
-    // if (todos[index].taskCompleted) {
-    //     todos[index].taskCompleted = false;
-    // } else {
-    //     todos[index].taskCompleted = true;
-    // }
     saveTodosToLocalStorage();
     renderTodos();
 }
@@ -87,10 +81,10 @@ function renderTodos() {
 
         list.innerHTML =`
         <ul>
-            <li><strong>Task Title:</strong> ${todo.taskTitle}</li>
-            <li><strong>Task Description:</strong> ${todo.taskDescription}</li>
-            <li><strong>Task Due Date:</strong> ${todo.taskDueDate}</li>
-            <li><strong>Priority Level:</strong> ${todo.priorityLevel}</li>
+            <li><span class="font-bold">Task Title:</span> ${todo.taskTitle}</li>
+            <li><span class="font-bold">Task Description:</span> ${todo.taskDescription}</li>
+            <li><span class="font-bold">Task Due Date:</span> ${todo.taskDueDate}</li>
+            <li><span class="font-bold">Priority Level:</span> ${todo.priorityLevel}</li>
         </ul>
             <button class="text-white p-1 bg-yellow-700 rounded-lg mr-2" onclick="editTodo(${index})">Edit</button>
             <button class="text-white p-1 bg-red-700 rounded-lg" onclick="deleteTodo(${index})">Delete</button>
@@ -176,10 +170,10 @@ function renderFilterTodos() {
 
         list.innerHTML =`
         <ul>
-            <li><strong>Task Title:</strong> ${todo.taskTitle}</li>
-            <li><strong>Task Description:</strong> ${todo.taskDescription}</li>
-            <li><strong>Task Due Date:</strong> ${todo.taskDueDate}</li>
-            <li><strong>Priority Level:</strong> ${todo.priorityLevel}</li>
+            <li class="font-bold">Task Title: ${todo.taskTitle}</li>
+            <li class="font-bold">Task Description: ${todo.taskDescription}</li>
+            <li class="font-bold">Task Due Date: ${todo.taskDueDate}</li>
+            <li class="font-bold">Priority Level: ${todo.priorityLevel}</li>
         </ul>
             <button class="text-white p-1 bg-yellow-700 rounded-lg mr-2" onclick="editTodo(${index})">Edit</button>
             <button class="text-white p-1 bg-red-700 rounded-lg" onclick="deleteTodo(${index})">Delete</button>
