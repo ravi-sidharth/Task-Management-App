@@ -13,12 +13,33 @@ formSubmit.addEventListener('submit',(event)=> {
     event.preventDefault()
 
     const newTask = {
-        taskTitle: taskTitle.value.trim(),
-        taskDescription: taskDescription.value.trim(),
-        taskDueDate: taskDueDate.value.trim(),
-        priorityLevel: priorityLevel.value.trim(),
-        taskCompleted: false
+        taskTitle:taskTitle.value.trim(),
+        taskDescription:taskDescription.value.trim(),
+        taskDueDate:taskDueDate.value.trim(),
+        priorityLevel:priorityLevel.value.trim(),
+        taskCompleted:false
     }
+
+    if (!newTask.taskTitle){
+        alert("The task title is empty, Please write something else!")
+        return
+    }
+
+    if (!newTask.taskDescription){
+        alert("The task Description is empty, Please write something else!")
+        return
+    }
+
+    const todayDate = new Date()
+    todayDate.setHours(0, 0, 0, 0); 
+
+    const taskDate = new Date(newTask.taskDueDate)
+    taskDate.setHours(0, 0, 0, 0); 
+    
+    if(taskDate-todayDate<0) {
+        alert("The task due date cannot be in the past, Please change it to another upcoming date.")
+        return 
+        }
 
     if (editingIndex >= 0) {
         // Update existing todo
