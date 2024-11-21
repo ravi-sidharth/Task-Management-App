@@ -34,6 +34,7 @@ formSubmit.addEventListener('submit',(event)=> {
     renderTodos()
 })
 
+// clear the form data 
 function clearForm() {
     taskTitle.value=""
     taskDescription.value=""
@@ -74,7 +75,7 @@ function renderTodos() {
     const completedTaskList = document.getElementById('completedTask')
     pendingTaskList.innerHTML=""
     completedTaskList.innerHTML=""
-    
+
     todos.forEach((todo,index)=> {
         const list = document.createElement('div')
         const checked =todo.taskCompleted ? 'checked' : '';
@@ -170,10 +171,10 @@ function renderFilterTodos() {
 
         list.innerHTML =`
         <ul>
-            <li class="font-bold">Task Title: ${todo.taskTitle}</li>
-            <li class="font-bold">Task Description: ${todo.taskDescription}</li>
-            <li class="font-bold">Task Due Date: ${todo.taskDueDate}</li>
-            <li class="font-bold">Priority Level: ${todo.priorityLevel}</li>
+            <li><span class="font-bold">Task Title:</span> ${todo.taskTitle}</li>
+            <li><span class="font-bold">Task Description:</span> ${todo.taskDescription}</li>
+            <li><span class="font-bold">Task Due Date:</span> ${todo.taskDueDate}</li>
+            <li><span class="font-bold">Priority Level:</span> ${todo.priorityLevel}</li>
         </ul>
             <button class="text-white p-1 bg-yellow-700 rounded-lg mr-2" onclick="editTodo(${index})">Edit</button>
             <button class="text-white p-1 bg-red-700 rounded-lg" onclick="deleteTodo(${index})">Delete</button>
