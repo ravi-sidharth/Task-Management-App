@@ -11,7 +11,6 @@ const priorityLevel = document.getElementById('priorityLevel')
 
 formSubmit.addEventListener('submit',(event)=> { 
     event.preventDefault()
-
     const newTask = {
         taskTitle:taskTitle.value.trim(),
         taskDescription:taskDescription.value.trim(),
@@ -31,10 +30,10 @@ formSubmit.addEventListener('submit',(event)=> {
     }
 
     const todayDate = new Date()
-    todayDate.setHours(0, 0, 0, 0); 
-
+    todayDate.setHours(0,0,0,0); 
+    
     const taskDate = new Date(newTask.taskDueDate)
-    taskDate.setHours(0, 0, 0, 0); 
+    taskDate.setHours(0,0,0,0); 
     
     if(taskDate-todayDate<0) {
         alert("The task due date cannot be in the past, Please change it to another upcoming date.")
@@ -51,7 +50,6 @@ formSubmit.addEventListener('submit',(event)=> {
         todos.push(newTask)
     }
     clearForm()
-    saveTodosToLocalStorage()
     renderTodos()
 })
 
@@ -92,35 +90,28 @@ function completeTodo(index) {
 }
 
 function renderTodos() {
-    const pendingTaskList = document.getElementById('pendingTask')
-    const completedTaskList = document.getElementById('completedTask')
-    pendingTaskList.innerHTML=""
-    completedTaskList.innerHTML=""
-
-    todos.forEach((todo,index)=> {
-        const list = document.createElement('div')
-        const checked =todo.taskCompleted ? 'checked' : '';
-
-        list.innerHTML =`
-        <ul>
-            <li><span class="font-bold">Task Title:</span> ${todo.taskTitle}</li>
-            <li><span class="font-bold">Task Description:</span> ${todo.taskDescription}</li>
-            <li><span class="font-bold">Task Due Date:</span> ${todo.taskDueDate}</li>
-            <li><span class="font-bold">Priority Level:</span> ${todo.priorityLevel}</li>
-        </ul>
-            <button class="text-white p-1 bg-yellow-700 rounded-lg mr-2" onclick="editTodo(${index})">Edit</button>
-            <button class="text-white p-1 bg-red-700 rounded-lg" onclick="deleteTodo(${index})">Delete</button>
-            <button class="text-white mx-2 p-1 bg-green-700 rounded-lg"><input onclick="completeTodo(${index})" class="text-blue" type="checkbox" ${checked}>Completed</button>
-        `
-        if (todo.taskCompleted) {
-            list.className ="bg-slate-300 rounded-lg mt-6 p-3 border-2 opacity-0.2 line-through"
-            completedTaskList.appendChild(list);
-        } else {
-            pendingTaskList.appendChild(list);
-            list.className ="bg-fuchsia-500 rounded-lg mt-6 p-3 border-2 uppercase"
+    filterTodos=[]
+    // for priority wise todo 
+    todos.forEach(todo=> {
+        if(todo.priorityLevel=="high"){
+            filterTodos.push(todo)
         }
     })
-}
+
+    todos.forEach(todo=> {
+        if(todo.priorityLevel=="medium"){
+            filterTodos.push(todo)
+        }
+    })
+
+    todos.forEach(todo=> {
+        if(todo.priorityLevel=="low"){
+            filterTodos.push(todo)
+        }
+    })
+    saveTodosToLocalStorage();
+    renderFilterTodos()
+    }
 
 // For data filter function 
 const filterTasks = document.getElementById('filterTasks')
@@ -171,7 +162,7 @@ filterTasks.addEventListener('change',(e)=>{
     
     else if (e.target.value=="completed"){
         todos.forEach(todo=> {
-            if(todo.taskCompleted==true) {
+            if(todo.taskCompleted==true){
                 filterTodos.push(todo)
             }
         })
